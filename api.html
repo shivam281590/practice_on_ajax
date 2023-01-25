@@ -31,6 +31,79 @@
 
     <script>
         let mytable=document.getElementById("mytable");
+        let xhr=new XMLHttpRequest();
+        xhr.open("GET","https://jsonplaceholder.typicode.com/users");
+        xhr.responseType="json";
+        xhr.addEventListener('load',()=>{
+            let arr=[],i=0;
+            xhr.response.forEach(element => {
+                
+                let tr=document.createElement("tr");
+                let tdo=document.createTextNode(`${xhr.response[i].id}`);
+                let tdt=document.createTextNode(`${xhr.response[i].name}`);
+                let tdth=document.createTextNode(`${xhr.response[i].username}`);
+                let tdfo=document.createTextNode(`${xhr.response[i].email}`);
+                let tdfi=document.createTextNode(`${xhr.response[i].address}`);
+                let tdsi=document.createTextNode(`${xhr.response[i].phone}`);
+                let tdse=document.createTextNode(`${xhr.response[i].website}`);
+                let tdei=document.createTextNode(`${xhr.response[i].company}`);
+                
+                let tddo=document.createElement("td");
+                tddo.appendChild(tdo);
+                tr.appendChild(tddo);
+
+                let tddt=document.createElement("td");
+                tddt.appendChild(tdt);
+                tr.appendChild(tddt);
+
+                let tddth=document.createElement("td");
+                tddth.appendChild(tdth);
+                tr.appendChild(tddth);
+
+                let tddfo=document.createElement("td");
+                tddfo.appendChild(tdfo);
+                tr.appendChild(tddfo);
+
+                let tddfi=document.createElement("td");
+                tddfi.appendChild(tdfi);
+                tr.appendChild(tddfi);
+
+                let tddsi=document.createElement("td");
+                tddsi.appendChild(tdsi);
+                tr.appendChild(tddsi);
+
+                let tddse=document.createElement("td");
+                tddse.appendChild(tdse);
+                tr.appendChild(tddse);
+
+                let tddei=document.createElement("td");
+                tddei.appendChild(tdei);
+                tr.appendChild(tddei);
+
+                mytable.appendChild(tr);
+                i++;
+                
+                // arr.push(<tr>
+                //     <td>{xhr.response[i].id}</td>
+                //     <td>{xhr.response[i].name}</td>
+                //     <td>{xhr.response[i].username}</td>
+                //     <td>{xhr.response[i].email}</td>
+                //     <td>{xhr.response[i].address}</td>
+                //     <td>{xhr.response[i].phone}</td>
+                //     <td>{xhr.response[i].website}</td>
+                //     <td>{xhr.response[i].company}</td>
+                // </tr>);
+                
+            });
+            for(let i=0;i<arr.length;i++){
+                mytable.appendChild(arr[i]);
+            }
+            
+        });
+        xhr.addEventListener('error',()=>{
+            console.log(xhr.status);
+        })
+        xhr.send();
         
     </script>
 
