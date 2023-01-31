@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .loader{
+            display: none;
+        }
+  
+        .addloader{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="fun()">Fetch Data</button>
+    <div id="addLoading" class="loader" style="width:420px;height:140px;background-color:#000;
+    color:#fff;text-align: center;position: absolute;top:20%;left:35%;border-radius: 40px;align-items:center;justify-content: center;">
+        <span><b style="font-size:1.5rem">LOADING...</b></span>
+    </div>
+    <script>
+        "use strict";
+        let fun=()=>{
+            let addl=document.getElementById("addLoading");
+        let xhr=new XMLHttpRequest();
+        
+        xhr.open('POST','https://erp.knocialindia.com/api/v1/GetJobApplication');
+        if(xhr.readyState===1){
+                
+                addl.classList.add("addloader");
+            }
+        xhr.responseType='json';
+        xhr.setRequestHeader('Content-Type','application/json');
+        xhr.onreadystatechange=()=>{
+            
+            if(xhr.readyState===3){
+                
+                addl.classList.remove("addloader");
+            }
+            if(xhr.readyState===4){
+                if(xhr.status>199 && xhr.status<300){
+                    console.log(xhr.response.data);
+                }
+                else{
+                    addl.classList.remove("addloader");
+                    console.log("some error...");
+                }
+            }
+        }
+        xhr.send(JSON.stringify({uid:'63b52c3799fb6'}));
+        }
+    </script>
+</body>
+</html>
